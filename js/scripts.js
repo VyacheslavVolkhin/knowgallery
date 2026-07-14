@@ -26,6 +26,25 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
 
+	//fixed header
+	let header = document.querySelector(".header-main-panel");
+	let headerHeight = header.offsetHeight;
+	let content = document.querySelector(".wrap");
+	if (header) {
+		if (content) {
+		  //content.style.paddingTop = headerHeight + "px";
+		}
+	}
+	 window.addEventListener("scroll", function () {
+	   const windowTop = window.pageYOffset;
+	   if (windowTop > 100) {
+		 document.querySelector(".wrap").classList.add("header-fixed");
+		} else {
+		 document.querySelector(".wrap").classList.remove("header-fixed");
+		}
+	});
+
+
 	
 	//photo srt upload
 	const fileFields = document.querySelectorAll('.js-field-file-photo');
@@ -194,6 +213,41 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 
+	//mobile menu
+	const menuButton = document.querySelectorAll('.catalog-content-block .btn-catalog');
+	for (i = 0;i < menuButton.length;i++) {
+		menuButton[i].addEventListener('click', function(e) {
+			if (innerWidth < 1024) {
+				if (this.nextElementSibling && this.nextElementSibling.tagName === 'UL') {
+					this.parentElement.classList.toggle('open')
+					e.preventDefault()
+					//e.stopPropagation()
+					return false
+				}
+			}
+		})
+	}
+
+
+
+
+	//catalog toggle
+	const catalogToggleButton = document.getElementById('catToggle');
+	const catalogToggleSecondButton = document.getElementById('catToggleSecond');
+	const catalogButton = document.getElementById('catButton');
+	catalogButton.addEventListener('click', function(e) {
+		//e.preventDefault();
+	});
+	catalogToggleButton.addEventListener('click', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		catalogButton.click();
+	});
+	catalogToggleSecondButton.addEventListener('click', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		catalogButton.click();
+	});
 
 
 	//search toggle
