@@ -196,14 +196,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-	//search toggle mobile
-	const searchToggleButton = document.getElementById('searchToggle')
-	const searchButton = document.getElementById('searchButton')
+	//search toggle
+	const searchToggleButton = document.getElementById('searchToggle');
+	const searchButton = document.getElementById('searchButton');
+	searchButton.addEventListener('click', function(e) {
+		//e.preventDefault();
+	});
 	searchToggleButton.addEventListener('click', function(e) {
 		e.preventDefault();
 		e.stopPropagation();
 		searchButton.click();
-		return false;
 	});
 
 	//btn tgl and add
@@ -410,16 +412,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	function popupElementsContentPositionClass() {
 		const wrapEl = document.querySelector('.wrap')
 		const wrapWidth = wrapEl ? wrapEl.offsetWidth : 0
-		popupElements.forEach(element => {
-			let pLeft = element.offsetLeft
-			let pWidth = element.querySelector('.js-popup-block').offsetWidth
-			let pMax = pLeft + pWidth;
-			if (pMax > wrapWidth) {
-				element.classList.add('popup-right')
-			} else {
-				element.classList.remove('popup-right')
-			}
-		})
+		// popupElements.forEach(element => {
+		// 	let pLeft = element.offsetLeft
+		// 	let pWidth = element.querySelector('.js-popup-block').offsetWidth
+		// 	let pMax = pLeft + pWidth;
+		// 	if (pMax > wrapWidth) {
+		// 		element.classList.add('popup-right')
+		// 	} else {
+		// 		element.classList.remove('popup-right')
+		// 	}
+		// })
 	}
 	for (let i = 0; i < togglePopupButtons.length; i++) {
 		togglePopupButtons[i].addEventListener('click', function (e) {
@@ -745,6 +747,41 @@ document.addEventListener("DOMContentLoaded", function() {
 				pauseOnMouseEnter: false,
 			},
 			navigation: false,
+		});
+	});
+
+
+	//slider
+	const slidersmain = document.querySelectorAll(".slider-main");
+	
+	slidersmain.forEach((container) => {
+		const swiperEl = container.querySelector(".swiper");
+		const paginationEl = container.querySelector(".slider-main-pagination");
+		const nextEl = container.querySelector(".button-slider-main-next");
+		const prevEl = container.querySelector(".button-slider-main-prev");
+	
+		if (!swiperEl) return;
+		
+	
+		new Swiper(swiperEl, {
+			loop: false,
+			slidesPerGroup: 1,
+			slidesPerView: 1,
+			spaceBetween: 0,
+			autoHeight: true,
+			speed: 400,
+			pagination: {
+				el: paginationEl,
+				clickable: true,
+			},
+			autoplay: {
+				delay: 4000,
+				disableOnInteraction: false,
+			},
+			navigation: {
+				nextEl: nextEl,
+				prevEl: prevEl,
+			},
 		});
 	});
 

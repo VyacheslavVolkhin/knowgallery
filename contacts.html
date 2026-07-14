@@ -21,6 +21,7 @@
         <script src="./js/filter.js" defer></script>
         <script src="./js/attach.js" defer></script>
         <script src="./js/counter.js" defer></script>
+        <script src="./js/timer.js" defer></script>
         <script src="./js/scripts.js" defer></script>
         <link rel="stylesheet" href="./css/style.css" />
     </head>
@@ -577,12 +578,87 @@
                             <!--/item wrap-->
                         </div>
                     </div>
-                    <div class="map-inner-wrap section-mobile-full">
+                    <div class="map-inner-wrap section-mobile-full" id="map">
                         <script
+                            src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ваш_ключ_API"
                             type="text/javascript"
-                            charset="utf-8"
-                            src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=-eov8YMYfEHTrqs_Q1kKzkBJYs6HKSuT&widdiv=100%25&height=100%25&lang=ru_RU&sourceType=constructor"
                         ></script>
+                        <script type="text/javascript">
+                            ymaps.ready(init);
+
+                            function init() {
+                                // Адрес для геокодирования и отображения на карте
+                                var address = 'г. Москва, ул. Люблинская, д. 102А, ТЦ "Марьинский пассаж", пав. 67/2';
+
+                                // Создаем карту с начальными координатами (центр Москвы)
+                                // После геокодирования центр сместится в нужную точку
+                                var myMap = new ymaps.Map("map", {
+                                    center: [55.684758, 37.738521], // Приблизительный центр для Москвы (Люблино)
+                                    zoom: 16,
+                                    controls: ["zoomControl", "fullscreenControl", "typeSelector"],
+                                });
+
+                                // Используем геокодер для точного поиска адреса
+                                ymaps
+                                    .geocode(address, {
+                                        results: 1,
+                                    })
+                                    .then(function (res) {
+                                        // Получаем первый (наиболее подходящий) результат
+                                        var firstGeoObject = res.geoObjects.get(0);
+
+                                        if (firstGeoObject) {
+                                            // Получаем координаты найденного объекта
+                                            var coords = firstGeoObject.geometry.getCoordinates();
+
+                                            // Устанавливаем центр карты и коэффициент масштабирования
+                                            myMap.setCenter(coords, 18);
+
+                                            // Создаем метку с выноской (балуном)
+                                            var placemark = new ymaps.Placemark(
+                                                coords,
+                                                {
+                                                    balloonContentHeader: "ТЦ «Марьинский пассаж»",
+                                                    balloonContentBody: "Павильон 67/2<br>ул. Люблинская, д. 102А",
+                                                    hintContent: "Пав. 67/2, ТЦ Марьинский пассаж",
+                                                },
+                                                {
+                                                    preset: "islands#redShoppingIcon", // Иконка торгового центра
+                                                    iconColor: "#e63946",
+                                                },
+                                            );
+
+                                            // Добавляем метку на карту
+                                            myMap.geoObjects.add(placemark);
+
+                                            // Автоматически открываем балун с информацией
+                                            placemark.balloon.open();
+                                        } else {
+                                            console.error("Адрес не найден. Проверьте корректность ввода.");
+                                            // Если адрес не найден, показываем хотя бы карту с руками введенными координатами
+                                            myMap.setCenter([55.684758, 37.738521], 17);
+                                        }
+                                    })
+                                    .catch(function (err) {
+                                        console.error("Ошибка геокодирования: ", err);
+                                        // Запасной вариант: ставим метку вручную по известным координатам
+                                        var fallbackCoords = [55.6848, 37.7385];
+                                        myMap.setCenter(fallbackCoords, 17);
+                                        var fallbackPlacemark = new ymaps.Placemark(
+                                            fallbackCoords,
+                                            {
+                                                balloonContent: "ТЦ «Марьинский пассаж», пав. 67/2 (приблизительно)",
+                                                hintContent: "ул. Люблинская, 102А",
+                                            },
+                                            {
+                                                preset: "islands#redShoppingIcon",
+                                            },
+                                        );
+                                        myMap.geoObjects.add(fallbackPlacemark);
+                                        fallbackPlacemark.balloon.open();
+                                    });
+                            }
+                        </script>
                     </div>
                 </div>
                 <!--/info-contacts-box-->

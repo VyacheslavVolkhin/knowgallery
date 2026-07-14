@@ -80,6 +80,9 @@ class ResponsiveMenu {
         // Скрываем кнопку "Еще"
         this.moreItem.classList.remove('active');
         
+        // Убираем класс active с меню
+        this.menu.classList.remove('active');
+        
         // Очищаем выпадающий список
         this.dropdown.innerHTML = '';
     }
@@ -135,6 +138,9 @@ class ResponsiveMenu {
         } else {
             this.moreItem.classList.remove('active');
         }
+        
+        // Добавляем класс active к меню после завершения всех вычислений
+        this.menu.classList.add('active');
     }
 
     populateDropdown(items) {

@@ -1,12 +1,7 @@
 // Инициализация всех обработчиков фильтра
 document.addEventListener('DOMContentLoaded', function() {
-    initFilterRemoveButtons();
-    initFilterCheckboxes();
-    initCategorySearch();
-    resetAllFilters();
-    syncSelectedFilters();
-	initPriceRangeDisplay();
 
+	
 	// filter actions
 	const filterButtonOpen = document.querySelector('.js-filter-open');
 	const filterButtonClose = document.querySelector('.js-filter-close');
@@ -14,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterButtonOpen.addEventListener("click", function(event) {
 				document.body.classList.add("filter-show");
 				event.preventDefault();
+				return false;
 		})
 	}
 	if (filterButtonClose) {
@@ -22,6 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
 				event.preventDefault();
 		})
 	}
+
+
+    initFilterRemoveButtons();
+    initFilterCheckboxes();
+    initCategorySearch();
+    resetAllFilters();
+    syncSelectedFilters();
+	//initPriceRangeDisplay();
+
 });
 
 //range PRICE slider
