@@ -9329,6 +9329,24 @@ a.tile-main:hover,
     margin: 0;
   }
 }
+@media (min-width: 1440px) {
+  .slider-action-box {
+    background: none;
+  }
+  .slider-action-box .photo-inner-wrap {
+    left: auto;
+    right: 50px;
+  }
+  .slider-action-box .section-title,
+  .slider-action-box .section-info {
+    max-width: 100%;
+    width: 100%;
+    padding-right: 550px;
+  }
+  .slider-action-box .section-title {
+    padding-right: 500px;
+  }
+}
 /* ----------------------------------- *\
 			inputs elements styles
 \* ----------------------------------- */
