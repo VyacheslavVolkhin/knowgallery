@@ -4193,6 +4193,13 @@ html.with-fancybox body.hide-scrollbar {
 .item-tile-category:hover {
   color: var(--clr-base-white);
 }
+.item-tile-category:hover .tile-title {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
+}
 .item-tile-catalog-small,
 .item-tile-catalog-rate {
   display: -webkit-box;
@@ -5585,6 +5592,9 @@ a.tile-main:hover,
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
+}
+.top-outer-box .slider-outer-wrap {
+  background: linear-gradient(207deg, #1a1a1a 0%, #2a2a2a 100%);
 }
 .top-outer-box .slider-wrap {
   overflow: hidden;
@@ -9300,6 +9310,63 @@ a.tile-main:hover,
     -ms-flex: 1;
     flex: 1;
     margin: 0;
+  }
+}
+@media (min-width: 1440px) {
+  .top-outer-box {
+    width: 100dvw;
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    max-width: 2000px;
+  }
+  .top-outer-box .action-outer-wrap {
+    width: 25%;
+    position: relative;
+    overflow: visible;
+  }
+  .top-outer-box .action-outer-wrap:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100dvw;
+    background: linear-gradient(207deg, #1a1a1a 0%, #2a2a2a 100%);
+  }
+  .top-outer-box .slider-outer-wrap {
+    width: calc(75% - 30px);
+    max-width: calc(75% - 30px);
+    background: none;
+    overflow: visible;
+  }
+  .top-outer-box .slider-outer-wrap:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100dvw;
+    background: linear-gradient(207deg, #1a1a1a 0%, #2a2a2a 100%);
+  }
+  .slider-action-box {
+    background: none;
+  }
+  .slider-action-box .photo-inner-wrap {
+    left: auto;
+    right: 50px;
+  }
+  .slider-action-box .section-title,
+  .slider-action-box .section-info {
+    max-width: 100%;
+    width: 100%;
+    padding-right: 550px;
+  }
+  .slider-action-box .section-title {
+    padding-right: 500px;
   }
 }
 /* ----------------------------------- *\
