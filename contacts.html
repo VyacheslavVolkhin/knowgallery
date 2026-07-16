@@ -1447,34 +1447,26 @@
                             ymaps.ready(init);
 
                             function init() {
-                                // Адрес для геокодирования и отображения на карте
                                 var address = 'г. Москва, ул. Люблинская, д. 102А, ТЦ "Марьинский пассаж", пав. 67/2';
 
-                                // Создаем карту с начальными координатами (центр Москвы)
-                                // После геокодирования центр сместится в нужную точку
                                 var myMap = new ymaps.Map("map", {
-                                    center: [55.684758, 37.738521], // Приблизительный центр для Москвы (Люблино)
+                                    center: [55.684758, 37.738521],
                                     zoom: 16,
                                     controls: ["zoomControl", "fullscreenControl", "typeSelector"],
                                 });
 
-                                // Используем геокодер для точного поиска адреса
                                 ymaps
                                     .geocode(address, {
                                         results: 1,
                                     })
                                     .then(function (res) {
-                                        // Получаем первый (наиболее подходящий) результат
                                         var firstGeoObject = res.geoObjects.get(0);
 
                                         if (firstGeoObject) {
-                                            // Получаем координаты найденного объекта
                                             var coords = firstGeoObject.geometry.getCoordinates();
 
-                                            // Устанавливаем центр карты и коэффициент масштабирования
                                             myMap.setCenter(coords, 18);
 
-                                            // Создаем метку с выноской (балуном)
                                             var placemark = new ymaps.Placemark(
                                                 coords,
                                                 {
@@ -1483,25 +1475,23 @@
                                                     hintContent: "Пав. 67/2, ТЦ Марьинский пассаж",
                                                 },
                                                 {
-                                                    preset: "islands#redShoppingIcon", // Иконка торгового центра
+                                                    preset: "islands#redShoppingIcon",
                                                     iconColor: "#e63946",
                                                 },
                                             );
 
-                                            // Добавляем метку на карту
                                             myMap.geoObjects.add(placemark);
 
-                                            // Автоматически открываем балун с информацией
                                             placemark.balloon.open();
                                         } else {
                                             console.error("Адрес не найден. Проверьте корректность ввода.");
-                                            // Если адрес не найден, показываем хотя бы карту с руками введенными координатами
+
                                             myMap.setCenter([55.684758, 37.738521], 17);
                                         }
                                     })
                                     .catch(function (err) {
                                         console.error("Ошибка геокодирования: ", err);
-                                        // Запасной вариант: ставим метку вручную по известным координатам
+
                                         var fallbackCoords = [55.6848, 37.7385];
                                         myMap.setCenter(fallbackCoords, 17);
                                         var fallbackPlacemark = new ymaps.Placemark(
@@ -1597,14 +1587,10 @@
                 <!--/info-contacts-box-->
 
                 <!--info-attention-box-->
-                <div class="info-attention-box text-large">
-                    <h3 class="h4-title">Сертификация:</h3>
-                    <p>
-                        Все ножи, представленные в интернет-магазине, сертифицированы и не являются холодным оружием.
-                        Соответствуют ГОСТ Р 51644-2000 (п. 5. 1. 1). Сертификаты соответствия №№ РОСС RU. СА03. ВО3553,
-                        СА03. ВО2816, СА03. ВО3211.
-                    </p>
-                </div>
+                <!-- <div class="info-attention-box text-large">
+					<h3 class="h4-title">Сертификация:</h3>
+					<p>Все ножи, представленные в интернет-магазине, сертифицированы и не являются холодным оружием. Соответствуют ГОСТ Р 51644-2000 (п. 5. 1. 1). Сертификаты соответствия №№ РОСС RU. СА03. ВО3553, СА03. ВО2816, СА03. ВО3211.</p>
+				</div> -->
                 <!--/info-attention-box-->
 
                 <!--subscribe-outer-box-->
